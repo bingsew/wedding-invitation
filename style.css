@@ -590,4 +590,11 @@ body {
     .envelope-wrapper.open .letter {
         transform: translateY(-115px);
     }
+
+   /* ==============================
+   MONET GARDEN
+   ============================== */
+
+.garden-scene {
+    display: none;
 }
