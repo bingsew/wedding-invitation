@@ -4,12 +4,6 @@
     box-sizing: border-box;
 }
 
-html,
-body {
-    width: 100%;
-    min-height: 100%;
-}
-
 body {
     min-height: 100vh;
     overflow: hidden;
@@ -18,32 +12,17 @@ body {
     justify-content: center;
     align-items: center;
 
-    font-family: Georgia, "Times New Roman", serif;
-    color: #51483d;
-
     background:
-        radial-gradient(
-            circle at 20% 20%,
-            rgba(218, 203, 228, 0.30),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 85% 80%,
-            rgba(200, 220, 190, 0.35),
-            transparent 38%
-        ),
-        radial-gradient(
-            circle at 75% 15%,
-            rgba(242, 221, 180, 0.35),
-            transparent 32%
-        ),
-        #f5efe5;
+        radial-gradient(circle at 20% 25%, #eee6ef, transparent 35%),
+        radial-gradient(circle at 80% 75%, #e5eadb, transparent 35%),
+        #f6f0e6;
+
+    font-family: Georgia, "Times New Roman", serif;
+    color: #55493c;
 }
 
 
-/* ===============================
-   MAIN SCREEN
-   =============================== */
+/* SCREEN */
 
 .invitation {
     width: 100%;
@@ -58,35 +37,26 @@ body {
 }
 
 
-/* ===============================
-   ENVELOPE
-   =============================== */
+/* WHOLE ENVELOPE */
 
 .envelope-wrapper {
     position: relative;
 
     width: min(88vw, 440px);
-    height: 290px;
+    height: 285px;
 
     perspective: 1200px;
 
     filter:
-        drop-shadow(0 25px 25px rgba(71, 52, 35, 0.18));
-}
-
-.envelope {
-    position: relative;
-
-    width: 100%;
-    height: 100%;
+        drop-shadow(0 25px 22px rgba(67, 49, 32, .18));
 }
 
 
-/* ===============================
-   ENVELOPE BACK
-   =============================== */
+/* ==================================
+   BACK OF ENVELOPE
+   ================================== */
 
-.envelope-back {
+.back-flap {
     position: absolute;
 
     inset: 0;
@@ -94,40 +64,69 @@ body {
     background:
         linear-gradient(
             145deg,
-            #eadcc5,
-            #d7c09d
+            #eadcc4,
+            #d9c19e
         );
 
     border-radius: 4px;
-
-    border:
-        1px solid rgba(100, 78, 50, 0.10);
 
     z-index: 1;
 }
 
 
-/* ===============================
-   INVITATION CARD
-   =============================== */
+/* ==================================
+   LETTER
+   ================================== */
 
 .letter {
     position: absolute;
 
-    width: 88%;
-    height: 88%;
+    width: 86%;
+    height: 245px;
 
-    left: 6%;
+    left: 7%;
 
     /*
-       IMPORTANT:
-       The letter begins DOWN inside
+       Most of the card starts inside
        the envelope.
     */
 
-    top: 10%;
+    top: 32px;
 
-    padding: 46px 28px;
+    background:
+        linear-gradient(
+            #fffdf8,
+            #faf3e8
+        );
+
+    border:
+        1px solid rgba(106, 81, 52, .12);
+
+    box-shadow:
+        0 4px 12px rgba(57, 42, 27, .12);
+
+    z-index: 2;
+
+    /*
+       IMPORTANT:
+       Card starts lowered.
+    */
+
+    transform: translateY(105px);
+
+    transition:
+        transform 1.45s cubic-bezier(.22,.8,.3,1),
+        box-shadow 1.2s ease;
+}
+
+
+/* CONTENT */
+
+.letter-content {
+    width: 100%;
+    height: 100%;
+
+    padding: 35px 25px;
 
     display: flex;
     flex-direction: column;
@@ -136,59 +135,29 @@ body {
 
     text-align: center;
 
-    background:
-        linear-gradient(
-            180deg,
-            #fffdf8,
-            #faf2e5
-        );
+    opacity: 0;
 
-    border:
-        1px solid rgba(116, 91, 61, 0.12);
-
-    box-shadow:
-        0 4px 12px rgba(60, 45, 30, 0.12);
-
-    z-index: 2;
-
-    /*
-       Initially the content is invisible.
-    */
-
-    color: transparent;
+    transform: translateY(12px);
 
     transition:
-        transform 1.5s cubic-bezier(.22,.8,.3,1),
-        box-shadow 1.5s ease,
-        color .8s ease;
+        opacity .8s ease,
+        transform .8s ease;
 }
 
 
-/* little Victorian ornament */
+.ornament {
+    margin-bottom: 11px;
 
-.letter::before {
-    content: "❦";
-
-    display: block;
-
-    margin-bottom: 15px;
+    color: #a18a68;
 
     font-size: 17px;
-
-    color: transparent;
-
-    transition: color .8s ease;
 }
 
-
-/* ===============================
-   LETTER TYPOGRAPHY
-   =============================== */
 
 .letter-small {
     width: 100%;
 
-    margin-bottom: 20px;
+    margin-bottom: 17px;
 
     text-align: center;
 
@@ -196,22 +165,22 @@ body {
     letter-spacing: 3px;
 
     text-transform: uppercase;
+
+    color: #81705c;
 }
 
 
 .letter h1 {
     width: 100%;
 
-    margin: 0;
-
     text-align: center;
 
-    font-size: clamp(30px, 7vw, 40px);
+    font-size: 38px;
 
     font-weight: normal;
     font-style: italic;
 
-    line-height: 1.05;
+    line-height: 1;
 }
 
 
@@ -220,27 +189,45 @@ body {
 
     margin: 5px 0;
 
-    font-size: 21px;
+    font-size: 20px;
+
+    color: #9d8066;
 }
 
 
 .letter-date {
     width: 100%;
 
-    margin-top: 21px;
+    margin-top: 19px;
 
     text-align: center;
 
     font-size: 10px;
+
     letter-spacing: 4px;
 }
 
 
-/* ===============================
-   FRONT LEFT FOLD
-   =============================== */
+/* ==================================
+   ENVELOPE POCKET
+   ================================== */
 
-.envelope-left {
+.envelope-pocket {
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    z-index: 4;
+
+    pointer-events: none;
+}
+
+
+/* LEFT FOLD */
+
+.pocket-left {
     position: absolute;
 
     inset: 0;
@@ -248,25 +235,21 @@ body {
     background:
         linear-gradient(
             130deg,
-            #eee1ca,
-            #d9c19d
+            #eee1cb,
+            #d8c09c
         );
 
     clip-path: polygon(
         0 0,
-        54% 52%,
+        55% 54%,
         0 100%
     );
-
-    z-index: 4;
 }
 
 
-/* ===============================
-   FRONT RIGHT FOLD
-   =============================== */
+/* RIGHT FOLD */
 
-.envelope-right {
+.pocket-right {
     position: absolute;
 
     inset: 0;
@@ -274,25 +257,21 @@ body {
     background:
         linear-gradient(
             230deg,
-            #eadbc1,
-            #d2b78e
+            #e9dac0,
+            #d1b68e
         );
 
     clip-path: polygon(
         100% 0,
-        46% 52%,
+        45% 54%,
         100% 100%
     );
-
-    z-index: 4;
 }
 
 
-/* ===============================
-   BOTTOM POCKET
-   =============================== */
+/* BOTTOM FOLD */
 
-.envelope-bottom {
+.pocket-bottom {
     position: absolute;
 
     inset: 0;
@@ -300,38 +279,36 @@ body {
     background:
         linear-gradient(
             180deg,
-            #e8d6b8,
-            #d3b78d
+            #ead8b9,
+            #d5b88d
         );
 
     clip-path: polygon(
         0 100%,
-        50% 42%,
+        50% 43%,
         100% 100%
     );
-
-    z-index: 5;
 }
 
 
-/* ===============================
-   CLOSED TOP FLAP
-   =============================== */
+/* ==================================
+   TOP FLAP
+   ================================== */
 
 .envelope-flap {
     position: absolute;
 
+    width: 100%;
+    height: 61%;
+
     top: 0;
     left: 0;
-
-    width: 100%;
-    height: 60%;
 
     background:
         linear-gradient(
             180deg,
-            #eee2ce,
-            #dcc39d
+            #efe3cf,
+            #dcc29b
         );
 
     clip-path: polygon(
@@ -346,24 +323,24 @@ body {
 
     filter:
         drop-shadow(
-            0 4px 3px rgba(73, 54, 34, 0.12)
+            0 4px 3px rgba(72, 52, 32, .12)
         );
 
     transition:
         transform 1.05s cubic-bezier(.4,0,.2,1),
-        z-index 0s linear .52s;
+        z-index 0s .52s;
 }
 
 
-/* ===============================
+/* ==================================
    WAX SEAL
-   =============================== */
+   ================================== */
 
 .wax-seal {
     position: absolute;
 
     left: 50%;
-    top: 57%;
+    top: 59%;
 
     transform:
         translate(-50%, -50%)
@@ -375,49 +352,41 @@ body {
     border: none;
 
     border-radius:
-        48% 52% 46% 54%
-        / 53% 47% 52% 48%;
+        47% 53% 45% 55%
+        / 52% 46% 54% 48%;
 
     background:
         radial-gradient(
-            circle at 32% 27%,
-            #bd6862,
+            circle at 30% 25%,
+            #bd6963,
             #974744 32%,
-            #793538 67%,
-            #5e282d 100%
+            #793438 68%,
+            #5c282d
         );
 
-    color: #ecd0a7;
-
-    /*
-       More script-like appearance.
-    */
+    color: #edd1a7;
 
     font-family:
         "Brush Script MT",
         "Segoe Script",
         cursive;
 
-    font-size: 23px;
-
-    font-weight: normal;
+    font-size: 24px;
 
     cursor: pointer;
 
     z-index: 10;
 
     box-shadow:
-        0 7px 11px rgba(54, 24, 23, 0.32),
-        inset 3px 3px 5px rgba(255,255,255,0.17),
-        inset -4px -5px 7px rgba(52,12,15,0.32);
+        0 7px 11px rgba(51, 20, 20, .32),
+        inset 3px 3px 5px rgba(255,255,255,.17),
+        inset -4px -5px 7px rgba(49,10,13,.3);
 
     transition:
         opacity .4s ease,
         transform .4s ease;
 }
 
-
-/* embossed inner ring */
 
 .wax-seal::before {
     content: "";
@@ -429,26 +398,23 @@ body {
     border-radius: 50%;
 
     border:
-        1px solid rgba(237, 205, 163, 0.35);
-
-    box-shadow:
-        inset 0 0 4px rgba(47, 12, 15, 0.25);
+        1px solid rgba(240,205,162,.38);
 }
 
 
 .wax-seal span {
+    font-size: 15px;
+
     font-family:
         "Brush Script MT",
         "Segoe Script",
         cursive;
-
-    font-size: 15px;
 }
 
 
-/* ===============================
-   TAP TEXT
-   =============================== */
+/* ==================================
+   OPEN TEXT
+   ================================== */
 
 .open-text {
     margin-top: 40px;
@@ -460,22 +426,22 @@ body {
 
     text-transform: uppercase;
 
-    color: #746858;
+    color: #756959;
 
     opacity: .65;
 
     transition:
-        opacity .45s ease,
-        transform .45s ease;
+        opacity .4s ease,
+        transform .4s ease;
 }
 
 
-/* =========================================
-   OPENING SEQUENCE
-   ========================================= */
+/* ==================================
+   OPEN STATE
+   ================================== */
 
 
-/* 1 — seal disappears */
+/* SEAL */
 
 .envelope-wrapper.open .wax-seal {
     opacity: 0;
@@ -483,13 +449,13 @@ body {
     transform:
         translate(-50%, -50%)
         rotate(-10deg)
-        scale(.65);
+        scale(.6);
 
     pointer-events: none;
 }
 
 
-/* 2 — flap folds backwards */
+/* FLAP */
 
 .envelope-wrapper.open .envelope-flap {
     transform: rotateX(180deg);
@@ -498,39 +464,32 @@ body {
 }
 
 
-/* 3 — card slides UP from inside */
+/* LETTER COMES OUT */
 
 .envelope-wrapper.open .letter {
-    transform: translateY(-180px);
+    transform: translateY(-125px);
 
-    z-index: 6;
-
-    color: #51483d;
+    z-index: 3;
 
     box-shadow:
-        0 25px 35px rgba(60,45,30,0.18);
+        0 22px 30px rgba(57,42,27,.18);
 
-    /*
-       Wait for the flap to open first.
-    */
-
-    transition-delay:
-        .72s,
-        .72s,
-        1.15s;
+    transition-delay: .7s;
 }
 
 
-/* ornament appears with content */
+/* TEXT APPEARS AFTER CARD RISES */
 
-.envelope-wrapper.open .letter::before {
-    color: #9b8567;
+.envelope-wrapper.open .letter-content {
+    opacity: 1;
 
-    transition-delay: 1.15s;
+    transform: translateY(0);
+
+    transition-delay: 1.35s;
 }
 
 
-/* hide instruction */
+/* TAP MESSAGE */
 
 .envelope-wrapper.open + .open-text {
     opacity: 0;
@@ -539,63 +498,65 @@ body {
 }
 
 
-/* ===============================
+/* ==================================
    MOBILE
-   =============================== */
+   ================================== */
 
 @media (max-width: 500px) {
 
     .envelope-wrapper {
         width: min(88vw, 350px);
-        height: 230px;
+        height: 225px;
     }
 
     .letter {
-        padding: 31px 18px;
+        height: 200px;
+
+        top: 25px;
+
+        transform: translateY(85px);
     }
 
-    .letter::before {
-        margin-bottom: 9px;
-
-        font-size: 14px;
-    }
-
-    .letter-small {
-        margin-bottom: 13px;
-
-        font-size: 7px;
-        letter-spacing: 2px;
+    .letter-content {
+        padding: 25px 16px;
     }
 
     .letter h1 {
-        font-size: 27px;
+        font-size: 29px;
+    }
+
+    .letter-small {
+        font-size: 7px;
+
+        margin-bottom: 11px;
+
+        letter-spacing: 2px;
+    }
+
+    .ornament {
+        margin-bottom: 7px;
     }
 
     .letter h1 span {
         margin: 2px 0;
 
-        font-size: 18px;
+        font-size: 17px;
     }
 
     .letter-date {
-        margin-top: 14px;
+        margin-top: 12px;
 
         font-size: 9px;
-        letter-spacing: 3px;
     }
 
     .wax-seal {
-        width: 68px;
-        height: 66px;
+        width: 67px;
+        height: 65px;
 
         font-size: 21px;
     }
 
-    .open-text {
-        margin-top: 34px;
-    }
-
     .envelope-wrapper.open .letter {
-        transform: translateY(-140px);
+        transform: translateY(-105px);
     }
 }
