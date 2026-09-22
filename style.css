@@ -437,7 +437,14 @@ body {
    ============================== */
 
 .open-text {
-    margin-top: 40px;
+    position: absolute;
+
+    top: calc(50% - 190px);
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 100%;
 
     text-align: center;
 
@@ -516,7 +523,9 @@ body {
 .envelope-wrapper.open + .open-text {
     opacity: 0;
 
-    transform: translateY(8px);
+    transform:
+        translateX(-50%)
+        translateY(-8px);
 }
 
 
@@ -532,13 +541,13 @@ body {
     }
 
     .letter {
-        height: 200px;
+        height: 185px;
 
-        top: 22px;
+        top: 18px;
 
-        padding: 25px 18px;
+        padding: 22px 18px;
 
-        transform: translateY(15px);
+        transform: translateY(10px);
     }
 
 .letter-small {
@@ -547,6 +556,7 @@ body {
     font-size: 7px;
     letter-spacing: 2px;
 }
+   k
 
 .letter h1 {
     font-size: 29px;
