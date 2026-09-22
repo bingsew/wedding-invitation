@@ -1,3 +1,8 @@
+/* =========================================
+   BAT & WAZ WEDDING INVITATION
+   ENVELOPE OPENING SCREEN
+   ========================================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -12,40 +17,85 @@ body {
 
 body {
     min-height: 100vh;
+    overflow: hidden;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    overflow: hidden;
+    font-family: Georgia, "Times New Roman", serif;
+    color: #51483d;
 
+    /* Warm painted-paper background */
     background:
         radial-gradient(
-            circle at 50% 35%,
-            #fffdf8 0%,
-            #f4eee3 55%,
-            #e8dfd1 100%
-        );
-
-    font-family: Georgia, "Times New Roman", serif;
-    color: #504638;
+            ellipse at 20% 20%,
+            rgba(221, 205, 229, 0.35),
+            transparent 35%
+        ),
+        radial-gradient(
+            ellipse at 85% 75%,
+            rgba(207, 222, 191, 0.45),
+            transparent 38%
+        ),
+        radial-gradient(
+            ellipse at 70% 15%,
+            rgba(239, 218, 178, 0.35),
+            transparent 30%
+        ),
+        #f4efe5;
 }
 
 
-/* MAIN AREA */
+/* =========================================
+   MAIN AREA
+   ========================================= */
 
 .invitation {
+    position: relative;
+
     width: 100%;
+    min-height: 100vh;
 
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 
-    padding: 30px 20px;
+    padding: 40px 20px;
 }
 
 
-/* ENVELOPE WRAPPER */
+/* subtle glow behind stationery */
+
+.invitation::before {
+    content: "";
+
+    position: absolute;
+
+    width: 520px;
+    height: 420px;
+
+    max-width: 95vw;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.8),
+            rgba(255,255,255,0)
+        );
+
+    filter: blur(15px);
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   ENVELOPE WRAPPER
+   ========================================= */
 
 .envelope-wrapper {
     position: relative;
@@ -54,10 +104,12 @@ body {
     height: 290px;
 
     perspective: 1200px;
+
+    z-index: 2;
+
+    filter:
+        drop-shadow(0 28px 25px rgba(77, 60, 43, 0.18));
 }
-
-
-/* ENVELOPE */
 
 .envelope {
     position: relative;
@@ -67,30 +119,41 @@ body {
 }
 
 
-/* BACK OF ENVELOPE */
+/* =========================================
+   ENVELOPE BACK
+   ========================================= */
 
 .envelope-back {
     position: absolute;
-
     inset: 0;
-
-    background:
-        linear-gradient(
-            135deg,
-            #e6d1ae,
-            #d7bc94
-        );
 
     border-radius: 4px;
 
+    background:
+        linear-gradient(
+            120deg,
+            rgba(255,255,255,0.35),
+            transparent 35%
+        ),
+        linear-gradient(
+            145deg,
+            #e9dcc5,
+            #d9c6a8
+        );
+
+    border:
+        1px solid rgba(107, 87, 61, 0.12);
+
     box-shadow:
-        0 22px 45px rgba(70, 52, 34, 0.25);
+        inset 0 0 35px rgba(110, 87, 58, 0.08);
 
     z-index: 1;
 }
 
 
-/* LETTER */
+/* =========================================
+   INVITATION CARD
+   ========================================= */
 
 .letter {
     position: absolute;
@@ -101,21 +164,23 @@ body {
     left: 6%;
     bottom: 5%;
 
-    padding: 45px 25px;
-
-    background:
-        linear-gradient(
-            180deg,
-            #fffdf7,
-            #faf2e4
-        );
+    padding: 44px 28px;
 
     text-align: center;
 
-    border: 1px solid rgba(116, 91, 61, 0.12);
+    background:
+        linear-gradient(
+            rgba(255,255,255,0.22),
+            rgba(245,232,209,0.16)
+        ),
+        #fffaf0;
+
+    border:
+        1px solid rgba(122, 97, 66, 0.14);
 
     box-shadow:
-        0 5px 15px rgba(60, 45, 30, 0.12);
+        0 5px 15px rgba(61, 47, 32, 0.12),
+        inset 0 0 30px rgba(171, 142, 99, 0.06);
 
     z-index: 2;
 
@@ -124,47 +189,80 @@ body {
         box-shadow 1.4s ease;
 }
 
-.letter-small {
-    margin-bottom: 24px;
 
-    font-size: 10px;
+/* tiny decorative line */
+
+.letter::before {
+    content: "❦";
+
+    display: block;
+
+    margin-bottom: 13px;
+
+    color: #9a8566;
+
+    font-size: 17px;
+}
+
+
+/* INVITATION TEXT */
+
+.letter-small {
+    margin-bottom: 20px;
+
+    font-size: 9px;
+
     text-transform: uppercase;
     letter-spacing: 3px;
+
+    color: #85745f;
 }
 
 .letter h1 {
     font-size: clamp(29px, 7vw, 39px);
 
+    line-height: 1;
+
     font-weight: normal;
     font-style: italic;
 
-    line-height: 1.05;
+    color: #504638;
 }
 
 .letter h1 span {
     display: block;
 
-    margin: 3px 0;
+    margin: 5px 0;
 
-    font-size: 25px;
+    font-size: 22px;
+
+    color: #9b7d65;
 }
 
 .letter-date {
-    margin-top: 24px;
+    margin-top: 20px;
 
-    font-size: 12px;
+    font-size: 10px;
     letter-spacing: 4px;
+
+    color: #746653;
 }
 
 
-/* FRONT LEFT FOLD */
+/* =========================================
+   LEFT ENVELOPE FOLD
+   ========================================= */
 
 .envelope-left {
     position: absolute;
-
     inset: 0;
 
-    background: #dbc29d;
+    background:
+        linear-gradient(
+            130deg,
+            #eee1cb,
+            #d7c19f
+        );
 
     clip-path: polygon(
         0 0,
@@ -173,17 +271,28 @@ body {
     );
 
     z-index: 4;
+
+    filter:
+        drop-shadow(
+            2px 0 2px rgba(83, 64, 43, 0.07)
+        );
 }
 
 
-/* FRONT RIGHT FOLD */
+/* =========================================
+   RIGHT ENVELOPE FOLD
+   ========================================= */
 
 .envelope-right {
     position: absolute;
-
     inset: 0;
 
-    background: #d4b88f;
+    background:
+        linear-gradient(
+            230deg,
+            #e8d8bd,
+            #d2b993
+        );
 
     clip-path: polygon(
         100% 0,
@@ -192,34 +301,47 @@ body {
     );
 
     z-index: 4;
+
+    filter:
+        drop-shadow(
+            -2px 0 2px rgba(83, 64, 43, 0.06)
+        );
 }
 
 
-/* BOTTOM FOLD */
+/* =========================================
+   BOTTOM ENVELOPE FOLD
+   ========================================= */
 
 .envelope-bottom {
     position: absolute;
-
     inset: 0;
 
     background:
         linear-gradient(
             180deg,
-            #e5cca5,
-            #d6b98e
+            #ead9bd,
+            #d4b991
         );
 
     clip-path: polygon(
         0 100%,
-        50% 43%,
+        50% 42%,
         100% 100%
     );
 
     z-index: 5;
+
+    filter:
+        drop-shadow(
+            0 -2px 2px rgba(83, 64, 43, 0.08)
+        );
 }
 
 
-/* TOP FLAP */
+/* =========================================
+   TOP FLAP
+   ========================================= */
 
 .envelope-flap {
     position: absolute;
@@ -228,13 +350,13 @@ body {
     left: 0;
 
     width: 100%;
-    height: 58%;
+    height: 59%;
 
     background:
         linear-gradient(
             180deg,
-            #ead8b9,
-            #dcc29a
+            #efe3cf 0%,
+            #ddc6a2 100%
         );
 
     clip-path: polygon(
@@ -247,18 +369,44 @@ body {
 
     z-index: 7;
 
+    filter:
+        drop-shadow(
+            0 5px 3px rgba(77, 57, 37, 0.12)
+        );
+
     transition:
         transform 1.1s cubic-bezier(.4,0,.2,1),
         z-index 0s linear .55s;
-
-    filter:
-        drop-shadow(
-            0 4px 3px rgba(80, 59, 38, 0.12)
-        );
 }
 
 
-/* WAX SEAL */
+/* faint inner line on flap */
+
+.envelope-flap::after {
+    content: "";
+
+    position: absolute;
+
+    left: 7%;
+    top: 8%;
+
+    width: 86%;
+    height: 82%;
+
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        50% 100%
+    );
+
+    border-top:
+        1px solid rgba(110, 88, 59, 0.12);
+}
+
+
+/* =========================================
+   WAX SEAL
+   ========================================= */
 
 .wax-seal {
     position: absolute;
@@ -266,26 +414,37 @@ body {
     left: 50%;
     top: 54%;
 
-    transform: translate(-50%, -50%);
+    transform:
+        translate(-50%, -50%)
+        rotate(-3deg);
 
-    width: 74px;
-    height: 74px;
+    width: 78px;
+    height: 76px;
 
-    border: 0;
-    border-radius: 48% 52% 46% 54%;
+    border: none;
+
+    /*
+       Slightly imperfect edges make the seal
+       feel less like a perfect CSS circle.
+    */
+
+    border-radius:
+        48% 52% 45% 55%
+        / 53% 46% 54% 47%;
 
     background:
         radial-gradient(
-            circle at 34% 28%,
-            #bd6a63 0%,
-            #934744 35%,
-            #713234 75%,
-            #5b292c 100%
+            circle at 31% 25%,
+            #b96460 0%,
+            #984945 28%,
+            #7d3638 60%,
+            #622a2e 100%
         );
 
-    color: #f1d5ae;
+    color: #e6c99f;
 
-    font-family: Georgia, serif;
+    font-family: Georgia, "Times New Roman", serif;
+
     font-size: 18px;
     font-style: italic;
 
@@ -294,31 +453,72 @@ body {
     z-index: 10;
 
     box-shadow:
-        0 6px 12px rgba(54, 25, 24, 0.35),
-        inset 0 2px 4px rgba(255,255,255,0.25),
-        inset 0 -5px 8px rgba(54,15,15,0.3);
+        0 7px 10px rgba(55, 25, 24, 0.32),
+        inset 3px 4px 5px rgba(255,255,255,0.16),
+        inset -4px -5px 8px rgba(53,13,16,0.3);
 
     transition:
         transform .45s ease,
-        opacity .45s ease;
+        opacity .45s ease,
+        filter .3s ease;
 }
+
+
+/* inner embossed wax ring */
+
+.wax-seal::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 8px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid rgba(235,199,154,0.38);
+
+    box-shadow:
+        inset 0 0 4px rgba(54,18,20,0.25);
+}
+
 
 .wax-seal span {
-    font-size: 12px;
+    font-size: 11px;
 }
 
 
-/* INSTRUCTION */
+/* little hover effect for computers */
+
+.wax-seal:hover {
+    filter: brightness(1.06);
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-3deg)
+        scale(1.035);
+}
+
+
+/* =========================================
+   TAP TEXT
+   ========================================= */
 
 .open-text {
-    margin-top: 38px;
+    position: relative;
 
-    font-size: 10px;
+    margin-top: 42px;
+
+    font-size: 9px;
 
     letter-spacing: 4px;
     text-transform: uppercase;
 
-    opacity: .6;
+    color: #756958;
+
+    opacity: .65;
+
+    z-index: 2;
 
     transition:
         opacity .5s ease,
@@ -326,22 +526,23 @@ body {
 }
 
 
-/* =========================
-   OPEN STATE
-   ========================= */
+/* =========================================
+   OPEN ANIMATION
+   ========================================= */
 
 .envelope-wrapper.open .wax-seal {
     opacity: 0;
 
     transform:
         translate(-50%, -50%)
-        scale(.75);
+        rotate(-8deg)
+        scale(.65);
 
     pointer-events: none;
 }
 
 
-/* Flap folds backwards */
+/* flap folds backwards */
 
 .envelope-wrapper.open .envelope-flap {
     transform: rotateX(180deg);
@@ -350,7 +551,7 @@ body {
 }
 
 
-/* Letter rises AFTER opening */
+/* invitation rises from envelope */
 
 .envelope-wrapper.open .letter {
     transform: translateY(-175px);
@@ -358,22 +559,24 @@ body {
     z-index: 6;
 
     box-shadow:
-        0 20px 30px rgba(60, 45, 30, 0.18);
+        0 24px 35px rgba(61, 47, 32, 0.18);
 
     transition-delay: .65s;
 }
 
 
-/* Hide instruction */
+/* instruction disappears */
 
 .envelope-wrapper.open + .open-text {
     opacity: 0;
 
-    transform: translateY(10px);
+    transform: translateY(8px);
 }
 
 
-/* MOBILE */
+/* =========================================
+   MOBILE
+   ========================================= */
 
 @media (max-width: 500px) {
 
@@ -383,36 +586,46 @@ body {
     }
 
     .letter {
-        padding: 31px 18px;
+        padding: 29px 18px;
+    }
+
+    .letter::before {
+        margin-bottom: 8px;
+        font-size: 14px;
     }
 
     .letter-small {
-        margin-bottom: 15px;
+        margin-bottom: 13px;
 
-        font-size: 8px;
+        font-size: 7px;
         letter-spacing: 2px;
     }
 
     .letter h1 {
-        font-size: 28px;
+        font-size: 27px;
     }
 
     .letter h1 span {
-        font-size: 20px;
+        margin: 2px 0;
+        font-size: 18px;
     }
 
     .letter-date {
-        margin-top: 16px;
+        margin-top: 14px;
 
-        font-size: 10px;
+        font-size: 9px;
         letter-spacing: 3px;
     }
 
     .wax-seal {
-        width: 66px;
+        width: 68px;
         height: 66px;
 
         font-size: 16px;
+    }
+
+    .open-text {
+        margin-top: 34px;
     }
 
     .envelope-wrapper.open .letter {
