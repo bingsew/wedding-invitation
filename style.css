@@ -1169,3 +1169,112 @@ body {
             transparent 39%
         );
 }
+
+   /* =========================================
+   PAINTERLY GARDEN REFINEMENT
+   ========================================= */
+
+
+/* soften the hard horizon */
+
+.distant-trees {
+    top: 34%;
+    height: 36%;
+
+    filter: blur(14px);
+
+    opacity: .82;
+
+    transform: scale(1.08);
+}
+
+
+/* Make flower banks irregular and softer */
+
+.flower-bank-left,
+.flower-bank-right {
+    filter: blur(6px);
+
+    opacity: .72;
+
+    transform: scale(1.25);
+}
+
+/* Pond begins lower so it doesn't cut through names */
+
+.garden-pond {
+    bottom: -8%;
+
+    height: 31%;
+
+    transform: rotate(-1deg) scale(1.05);
+
+    background:
+        radial-gradient(
+            ellipse at 25% 25%,
+            rgba(186, 172, 207, .34),
+            transparent 28%
+        ),
+        radial-gradient(
+            ellipse at 68% 42%,
+            rgba(223, 184, 194, .28),
+            transparent 30%
+        ),
+        radial-gradient(
+            ellipse at 48% 80%,
+            rgba(118, 143, 116, .25),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(130, 165, 158, .78),
+            rgba(91, 137, 137, .88)
+        );
+
+    filter: blur(2px);
+}
+
+
+/* Water lines should barely be visible */
+
+.water-ripple {
+    opacity: .3;
+
+    filter: blur(1px);
+}
+
+
+/* Foreground should feel like paint rather than circles */
+
+.foreground-flowers {
+    bottom: -13%;
+
+    filter: blur(7px);
+
+    opacity: .65;
+
+    transform: scale(1.3);
+}
+
+
+/* Add atmospheric blending over the whole landscape */
+
+.garden-landscape::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent 25%,
+            rgba(218, 215, 185, .12) 48%,
+            rgba(93, 125, 93, .08) 70%,
+            rgba(112, 145, 145, .12) 100%
+        );
+
+    backdrop-filter: blur(1.5px);
+
+    pointer-events: none;
+}
