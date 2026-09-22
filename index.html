@@ -14,30 +14,56 @@
 
     <main class="invitation">
 
-        <div class="envelope">
+        <div class="envelope-wrapper" id="envelope">
 
-            <div class="envelope-flap"></div>
+            <div class="envelope">
 
-            <div class="letter">
-                <p class="letter-small">An invitation to celebrate</p>
+                <!-- The invitation card hidden inside -->
+                <div class="letter">
+                    <p class="letter-small">
+                        An invitation to celebrate
+                    </p>
 
-                <h1>Batrisyia<br>&<br>Wazien</h1>
+                    <h1>
+                        Batrisyia
+                        <span>&</span>
+                        Wazien
+                    </h1>
 
-                <p class="letter-date">14 · 11 · 2027</p>
+                    <p class="letter-date">
+                        14 · 11 · 2027
+                    </p>
+                </div>
+
+                <!-- Envelope -->
+                <div class="envelope-back"></div>
+                <div class="envelope-left"></div>
+                <div class="envelope-right"></div>
+                <div class="envelope-bottom"></div>
+
+                <!-- Top flap -->
+                <div class="envelope-flap"></div>
+
+                <!-- Wax seal -->
+                <button
+                    class="wax-seal"
+                    id="waxSeal"
+                    aria-label="Open invitation"
+                >
+                    B <span>&</span> W
+                </button>
+
             </div>
-
-            <button class="wax-seal">
-                <span>B</span>
-                <span class="seal-and">&</span>
-                <span>W</span>
-            </button>
 
         </div>
 
-        <p class="open-text">Tap the seal to open</p>
+        <p class="open-text" id="openText">
+            Tap the seal to open
+        </p>
 
     </main>
 
-</body>
+    <script src="script.js"></script>
 
+</body>
 </html>
