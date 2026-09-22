@@ -799,3 +799,369 @@ body {
 
     opacity: .9;
 }
+
+   /* =========================================
+   MONET GARDEN LANDSCAPE
+   ========================================= */
+
+.garden-landscape {
+    position: absolute;
+    inset: 0;
+
+    overflow: hidden;
+
+    z-index: 1;
+
+    pointer-events: none;
+}
+
+
+/* -----------------------------------------
+   PALE MORNING SKY
+   ----------------------------------------- */
+
+.garden-sky {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 44%;
+
+    background:
+        radial-gradient(
+            circle at 72% 18%,
+            rgba(255, 241, 174, .85),
+            transparent 25%
+        ),
+        radial-gradient(
+            ellipse at 20% 40%,
+            rgba(192, 191, 219, .45),
+            transparent 38%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(194, 218, 222, .9),
+            rgba(226, 218, 192, .65)
+        );
+
+    filter: blur(2px);
+}
+
+
+/* -----------------------------------------
+   DISTANT TREES
+   ----------------------------------------- */
+
+.distant-trees {
+    position: absolute;
+
+    top: 29%;
+    left: -8%;
+
+    width: 116%;
+    height: 32%;
+
+    background:
+        radial-gradient(
+            ellipse at 8% 70%,
+            #637c62 0 18%,
+            transparent 19%
+        ),
+        radial-gradient(
+            ellipse at 24% 60%,
+            #78906d 0 21%,
+            transparent 22%
+        ),
+        radial-gradient(
+            ellipse at 43% 65%,
+            #596f58 0 22%,
+            transparent 23%
+        ),
+        radial-gradient(
+            ellipse at 62% 57%,
+            #81936c 0 22%,
+            transparent 23%
+        ),
+        radial-gradient(
+            ellipse at 80% 65%,
+            #5f775c 0 22%,
+            transparent 23%
+        ),
+        radial-gradient(
+            ellipse at 97% 59%,
+            #82936d 0 19%,
+            transparent 20%
+        );
+
+    filter: blur(7px);
+
+    opacity: .72;
+}
+
+
+/* -----------------------------------------
+   LEFT FLOWER BANK
+   ----------------------------------------- */
+
+.flower-bank-left {
+    position: absolute;
+
+    left: -12%;
+    top: 42%;
+
+    width: 58%;
+    height: 42%;
+
+    background:
+        radial-gradient(
+            circle at 24% 20%,
+            rgba(222, 168, 193, .95) 0 3%,
+            transparent 4%
+        ),
+        radial-gradient(
+            circle at 42% 33%,
+            rgba(182, 158, 207, .95) 0 4%,
+            transparent 5%
+        ),
+        radial-gradient(
+            circle at 64% 18%,
+            rgba(246, 208, 121, .9) 0 3%,
+            transparent 4%
+        ),
+        radial-gradient(
+            circle at 72% 46%,
+            rgba(225, 153, 174, .9) 0 4%,
+            transparent 5%
+        ),
+        radial-gradient(
+            circle at 38% 60%,
+            rgba(126, 155, 201, .9) 0 4%,
+            transparent 5%
+        ),
+        radial-gradient(
+            ellipse at 45% 55%,
+            rgba(69, 104, 65, .9),
+            transparent 62%
+        );
+
+    filter: blur(2px);
+
+    opacity: .9;
+}
+
+
+/* -----------------------------------------
+   RIGHT FLOWER BANK
+   ----------------------------------------- */
+
+.flower-bank-right {
+    position: absolute;
+
+    right: -12%;
+    top: 39%;
+
+    width: 58%;
+    height: 45%;
+
+    background:
+        radial-gradient(
+            circle at 70% 17%,
+            rgba(201, 168, 216, .95) 0 4%,
+            transparent 5%
+        ),
+        radial-gradient(
+            circle at 42% 27%,
+            rgba(245, 211, 125, .95) 0 3%,
+            transparent 4%
+        ),
+        radial-gradient(
+            circle at 65% 48%,
+            rgba(231, 162, 187, .95) 0 4%,
+            transparent 5%
+        ),
+        radial-gradient(
+            circle at 35% 53%,
+            rgba(128, 156, 203, .9) 0 4%,
+            transparent 5%
+        ),
+        radial-gradient(
+            circle at 78% 66%,
+            rgba(238, 192, 118, .85) 0 3%,
+            transparent 4%
+        ),
+        radial-gradient(
+            ellipse at 55% 53%,
+            rgba(65, 102, 65, .9),
+            transparent 62%
+        );
+
+    filter: blur(2px);
+
+    opacity: .9;
+}
+
+
+/* -----------------------------------------
+   POND
+   ----------------------------------------- */
+
+.garden-pond {
+    position: absolute;
+
+    left: -10%;
+    bottom: -3%;
+
+    width: 120%;
+    height: 39%;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            ellipse at 28% 35%,
+            rgba(176, 172, 208, .5),
+            transparent 25%
+        ),
+        radial-gradient(
+            ellipse at 70% 54%,
+            rgba(226, 184, 191, .38),
+            transparent 25%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(124, 160, 153, .85),
+            rgba(88, 131, 126, .92)
+        );
+
+    transform: rotate(-1deg);
+
+    filter: blur(.4px);
+}
+
+
+/* -----------------------------------------
+   WATER RIPPLES
+   ----------------------------------------- */
+
+.water-ripple {
+    position: absolute;
+
+    height: 1px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(245, 236, 208, .45);
+
+    box-shadow:
+        0 8px 0 rgba(201, 189, 211, .18),
+        0 16px 0 rgba(236, 207, 187, .15);
+}
+
+
+.ripple-one {
+    width: 38%;
+
+    left: 7%;
+    top: 30%;
+}
+
+
+.ripple-two {
+    width: 46%;
+
+    right: 5%;
+    top: 55%;
+}
+
+
+.ripple-three {
+    width: 27%;
+
+    left: 39%;
+    top: 76%;
+}
+
+
+/* -----------------------------------------
+   FOREGROUND FLOWERS
+   ----------------------------------------- */
+
+.foreground-flowers {
+    position: absolute;
+
+    bottom: -8%;
+
+    width: 57%;
+    height: 36%;
+
+    filter: blur(1px);
+
+    opacity: .95;
+}
+
+
+.foreground-left {
+    left: -13%;
+
+    background:
+        radial-gradient(
+            circle at 25% 30%,
+            #c89ab9 0 4%,
+            transparent 5%
+        ),
+        radial-gradient(
+            circle at 48% 22%,
+            #e1b96e 0 4%,
+            transparent 5%
+        ),
+        radial-gradient(
+            circle at 64% 47%,
+            #9e9bc1 0 5%,
+            transparent 6%
+        ),
+        radial-gradient(
+            circle at 36% 63%,
+            #df9ca9 0 5%,
+            transparent 6%
+        ),
+        radial-gradient(
+            ellipse at 42% 75%,
+            #456a4f 0 38%,
+            transparent 39%
+        );
+}
+
+
+.foreground-right {
+    right: -13%;
+
+    background:
+        radial-gradient(
+            circle at 67% 24%,
+            #d5a1bd 0 5%,
+            transparent 6%
+        ),
+        radial-gradient(
+            circle at 45% 38%,
+            #e7c270 0 4%,
+            transparent 5%
+        ),
+        radial-gradient(
+            circle at 74% 55%,
+            #9897c0 0 5%,
+            transparent 6%
+        ),
+        radial-gradient(
+            circle at 33% 67%,
+            #d893a6 0 5%,
+            transparent 6%
+        ),
+        radial-gradient(
+            ellipse at 58% 77%,
+            #45684c 0 38%,
+            transparent 39%
+        );
+}
