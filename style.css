@@ -1,6 +1,6 @@
-/* ==============================
-   BASIC SETUP
-   ============================== */
+/* ==================================================
+   RESET
+   ================================================== */
 
 * {
     margin: 0;
@@ -8,58 +8,141 @@
     box-sizing: border-box;
 }
 
+
 html,
 body {
     width: 100%;
     min-height: 100%;
 }
 
+
+html {
+    background: #f5efe6;
+}
+
+
 body {
     min-height: 100vh;
+
     overflow: hidden;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    color: #55493d;
+
+    background: #f5efe6;
+}
+
+
+button {
+    font: inherit;
+}
+
+
+
+/* ==================================================
+   OPENING SCREEN
+   ================================================== */
+
+.opening-screen {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    min-height: 100vh;
 
     display: flex;
     justify-content: center;
     align-items: center;
+
+    padding:
+        max(30px, env(safe-area-inset-top))
+        22px
+        max(30px, env(safe-area-inset-bottom));
 
     background:
         radial-gradient(
-            circle at 20% 20%,
-            rgba(222, 210, 232, 0.35),
+            circle at 15% 20%,
+            rgba(225, 213, 232, .42),
             transparent 35%
         ),
+
         radial-gradient(
-            circle at 80% 80%,
-            rgba(211, 225, 199, 0.4),
-            transparent 35%
+            circle at 85% 80%,
+            rgba(211, 222, 196, .42),
+            transparent 38%
         ),
-        #f6f0e7;
 
-    font-family: Georgia, "Times New Roman", serif;
-    color: #51483d;
+        #f7f0e7;
+
+    transition:
+        opacity 1.4s ease,
+        visibility 1.4s ease;
 }
 
 
-/* ==============================
-   SCREEN
-   ============================== */
+/* When garden begins */
 
-.invitation {
+.opening-screen.leave {
+    opacity: 0;
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+
+
+/* ==================================================
+   TAP INSTRUCTION
+   ================================================== */
+
+.open-instruction {
+    position: absolute;
+
+    left: 50%;
+    top: calc(50% - 190px);
+
+    transform: translateX(-50%);
+
     width: 100%;
-    min-height: 100vh;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
 
-    padding: 30px 20px;
+    font-size: 11px;
+    font-weight: 500;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    color: #8a7a68;
+
+    opacity: .72;
+
+    transition:
+        opacity .45s ease,
+        transform .45s ease;
 }
 
 
-/* ==============================
-   ENVELOPE AREA
-   ============================== */
+.opening-screen.opened .open-instruction {
+    opacity: 0;
+
+    transform:
+        translateX(-50%)
+        translateY(-8px);
+}
+
+
+
+/* ==================================================
+   ENVELOPE
+   ================================================== */
 
 .envelope-wrapper {
     position: relative;
@@ -67,13 +150,14 @@ body {
     width: min(88vw, 440px);
     height: 285px;
 
-    perspective: 1200px;
+    perspective: 1400px;
 
     filter:
         drop-shadow(
-            0 25px 25px rgba(68, 50, 34, 0.18)
+            0 24px 22px rgba(68, 49, 31, .19)
         );
 }
+
 
 .envelope {
     position: relative;
@@ -83,123 +167,110 @@ body {
 }
 
 
-/* ==============================
-   BACK OF ENVELOPE
-   ============================== */
+
+/* ==================================================
+   ENVELOPE BACK
+   ================================================== */
 
 .envelope-back {
     position: absolute;
 
     inset: 0;
 
+    z-index: 1;
+
+    border:
+        1px solid rgba(103, 80, 53, .10);
+
     background:
         linear-gradient(
             145deg,
-            #eadcc5,
-            #d8c09c
+            #f1e4cf 0%,
+            #e1cba9 100%
         );
-
-    border-radius: 4px;
-
-    border:
-        1px solid rgba(100, 77, 50, 0.10);
-
-    z-index: 1;
 }
 
 
-/* ==============================
+
+/* ==================================================
    LETTER
-   ============================== */
+   ================================================== */
 
 .letter {
     position: absolute;
 
-    width: 86%;
-    height: 245px;
-
     left: 7%;
-    top: 25px;
+    top: 7%;
 
-    padding: 35px 25px;
+    width: 86%;
+    height: 86%;
+
+    z-index: 2;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 28px 20px;
 
     background:
         linear-gradient(
             180deg,
-            #fffdf8,
-            #faf3e8
+            #fffdf9 0%,
+            #faf3e8 100%
         );
 
     border:
-        1px solid rgba(110, 85, 55, 0.12);
+        1px solid rgba(103, 80, 53, .12);
 
     box-shadow:
-        0 4px 12px rgba(60, 45, 30, 0.12);
+        0 5px 14px rgba(61, 45, 29, .11);
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    text-align: center;
-
-    /*
-       Letter starts lowered inside envelope.
-    */
-
-    transform: translateY(20px);
-
-    z-index: 2;
+    transform: translateY(6px);
 
     transition:
-        transform 1.35s cubic-bezier(.22,.8,.3,1),
-        box-shadow 1.35s ease;
+        transform 1.4s cubic-bezier(.22,.8,.3,1),
+        box-shadow 1.4s ease;
 }
 
 
-/* Hide ALL letter content initially */
-
-.letter > * {
-    opacity: 0;
-
-    transition:
-        opacity .7s ease;
-}
-
-
-/* ==============================
-   LETTER TEXT
-   ============================== */
-
-.letter-small {
+.letter-inner {
     width: 100%;
 
-    margin-bottom: 18px;
-
     text-align: center;
 
-    font-size: 9px;
+    opacity: 0;
+
+    transform: translateY(8px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+
+.letter-small {
+    margin-bottom: 13px;
+
+    font-size: 10px;
+
     letter-spacing: 3px;
 
     text-transform: uppercase;
 
-    color: #81705c;
+    color: #85735f;
 }
 
 
 .letter h1 {
-    width: 100%;
+    font-size: 39px;
 
-    margin: 0;
-
-    text-align: center;
-
-    font-size: 38px;
-
-    font-weight: normal;
+    font-weight: 400;
     font-style: italic;
 
-    line-height: 1;
+    line-height: .95;
+
+    color: #55493e;
 }
 
 
@@ -208,147 +279,145 @@ body {
 
     margin: 5px 0;
 
-    font-size: 20px;
+    font-size: 21px;
 
-    color: #9d8066;
+    color: #a28769;
 }
 
 
 .letter-date {
-    width: 100%;
+    margin-top: 16px;
 
-    margin-top: 20px;
-
-    text-align: center;
-
-    font-size: 10px;
+    font-size: 11px;
 
     letter-spacing: 4px;
+
+    color: #66594a;
 }
 
 
-/* ==============================
-   LEFT FRONT FOLD
-   ============================== */
 
-.envelope-left {
-    position: absolute;
+/* ==================================================
+   ENVELOPE FRONT FOLDS
+   ================================================== */
 
-    inset: 0;
-
-    background:
-        linear-gradient(
-            130deg,
-            #eee1cb,
-            #d8c09c
-        );
-
-    clip-path: polygon(
-        0 0,
-        55% 54%,
-        0 100%
-    );
-
-    z-index: 4;
-}
-
-
-/* ==============================
-   RIGHT FRONT FOLD
-   ============================== */
-
-.envelope-right {
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        linear-gradient(
-            230deg,
-            #e9dac0,
-            #d1b68e
-        );
-
-    clip-path: polygon(
-        100% 0,
-        45% 54%,
-        100% 100%
-    );
-
-    z-index: 4;
-}
-
-
-/* ==============================
-   BOTTOM FRONT POCKET
-   ============================== */
-
+.envelope-left,
+.envelope-right,
 .envelope-bottom {
     position: absolute;
 
     inset: 0;
 
-    background:
-        linear-gradient(
-            180deg,
-            #ead8b9,
-            #d5b88d
-        );
-
-    clip-path: polygon(
-        0 100%,
-        50% 43%,
-        100% 100%
-    );
-
-    z-index: 5;
+    pointer-events: none;
 }
 
 
-/* ==============================
-   CLOSED TOP FLAP
-   ============================== */
+.envelope-left {
+    z-index: 4;
+
+    background:
+        linear-gradient(
+            130deg,
+            #f1e4cf,
+            #dfc8a5
+        );
+
+    clip-path:
+        polygon(
+            0 0,
+            55% 54%,
+            0 100%
+        );
+}
+
+
+.envelope-right {
+    z-index: 4;
+
+    background:
+        linear-gradient(
+            230deg,
+            #eee0c7,
+            #d9bf99
+        );
+
+    clip-path:
+        polygon(
+            100% 0,
+            45% 54%,
+            100% 100%
+        );
+}
+
+
+.envelope-bottom {
+    z-index: 5;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ead7b7,
+            #d6b789
+        );
+
+    clip-path:
+        polygon(
+            0 100%,
+            50% 43%,
+            100% 100%
+        );
+}
+
+
+
+/* ==================================================
+   TOP FLAP
+   ================================================== */
 
 .envelope-flap {
     position: absolute;
 
+    left: 0;
+    top: 0;
+
     width: 100%;
     height: 61%;
 
-    top: 0;
-    left: 0;
+    z-index: 7;
 
     background:
         linear-gradient(
             180deg,
-            #efe3cf,
-            #dcc29b
+            #f2e5d0,
+            #dfc6a0
         );
 
-    clip-path: polygon(
-        0 0,
-        100% 0,
-        50% 100%
-    );
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 100%
+        );
 
     transform-origin: top center;
 
-    z-index: 7;
+    backface-visibility: hidden;
 
     filter:
         drop-shadow(
-            0 4px 3px rgba(72, 52, 32, 0.12)
+            0 4px 3px rgba(71, 52, 33, .10)
         );
 
     transition:
-        transform 1s cubic-bezier(.4,0,.2,1),
-        z-index 0s linear .5s;
+        transform 1.05s cubic-bezier(.4,0,.2,1),
+        z-index 0s linear .53s;
 }
 
 
-/* ==============================
+
+/* ==================================================
    WAX SEAL
-   ============================== */
+   ================================================== */
 
 .wax-seal {
     position: absolute;
@@ -356,54 +425,51 @@ body {
     left: 50%;
     top: 60%;
 
-    transform:
-        translate(-50%, -50%)
-        rotate(-4deg);
+    z-index: 10;
 
     width: 76px;
     height: 74px;
 
-    border: none;
+    transform:
+        translate(-50%, -50%)
+        rotate(-4deg);
+
+    border: 0;
 
     border-radius:
         47% 53% 45% 55%
-        / 52% 46% 54% 48%;
-
-    background:
-        radial-gradient(
-            circle at 30% 25%,
-            #bd6963,
-            #974744 32%,
-            #793438 68%,
-            #5c282d
-        );
-
-    color: #efd3a9;
-
-    font-family:
-        "Brush Script MT",
-        "Segoe Script",
-        cursive;
-
-    font-size: 24px;
-    font-weight: normal;
+        /
+        52% 46% 54% 48%;
 
     cursor: pointer;
 
-    z-index: 10;
+    color: #efd3a7;
+
+    background:
+        radial-gradient(
+            circle at 28% 22%,
+            #bf6963 0%,
+            #a34e4b 28%,
+            #84393d 64%,
+            #642b31 100%
+        );
 
     box-shadow:
-        0 7px 11px rgba(51,20,20,.32),
-        inset 3px 3px 5px rgba(255,255,255,.17),
-        inset -4px -5px 7px rgba(49,10,13,.3);
+        0 8px 12px rgba(57, 20, 22, .30),
+
+        inset
+        3px 3px 5px
+        rgba(255,255,255,.16),
+
+        inset
+        -4px -5px 7px
+        rgba(45,10,13,.30);
 
     transition:
         opacity .4s ease,
         transform .4s ease;
 }
 
-
-/* embossed ring */
 
 .wax-seal::before {
     content: "";
@@ -412,126 +478,892 @@ body {
 
     inset: 8px;
 
+    border:
+        1px solid rgba(242, 207, 163, .45);
+
     border-radius: 50%;
 
-    border:
-        1px solid rgba(240,205,162,.4);
-
     box-shadow:
-        inset 0 0 4px rgba(50,15,18,.2);
+        inset 0 0 5px rgba(53, 14, 17, .18);
 }
 
 
-.wax-seal span {
+.seal-text {
+    position: relative;
+
+    z-index: 2;
+
     font-family:
-        "Brush Script MT",
-        "Segoe Script",
+        "Great Vibes",
         cursive;
 
-    font-size: 14px;
+    font-size: 25px;
+
+    white-space: nowrap;
 }
 
 
-/* ==============================
-   TAP TEXT
-   ============================== */
 
-.open-text {
-    position: absolute;
+/* ==================================================
+   ENVELOPE OPENING
+   ================================================== */
 
-    top: calc(50% - 190px);
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width: 100%;
-
-    text-align: center;
-
-    font-size: 9px;
-    letter-spacing: 4px;
-
-    text-transform: uppercase;
-
-    color: #756959;
-
-    opacity: .65;
-
-    transition:
-        opacity .4s ease,
-        transform .4s ease;
-}
-
-
-/* ==============================
-   OPENING
-   ============================== */
-
-
-/* 1. Seal disappears */
-
-.envelope-wrapper.open .wax-seal {
+.opening-screen.opened .wax-seal {
     opacity: 0;
 
     transform:
         translate(-50%, -50%)
-        rotate(-10deg)
-        scale(.6);
+        rotate(-12deg)
+        scale(.58);
 
     pointer-events: none;
 }
 
 
-/* 2. Flap opens */
-
-.envelope-wrapper.open .envelope-flap {
+.opening-screen.opened .envelope-flap {
     transform: rotateX(180deg);
 
     z-index: 1;
 }
 
 
-/* 3. Letter rises */
-
-.envelope-wrapper.open .letter {
-    transform: translateY(-115px);
-
-    /*
-       Still BEHIND the front envelope folds.
-    */
-
+.opening-screen.opened .letter {
     z-index: 3;
 
-    box-shadow:
-        0 22px 30px rgba(57,42,27,.18);
+    transform: translateY(-118px);
 
-    transition-delay: .65s;
+    box-shadow:
+        0 22px 32px rgba(57,42,27,.18);
+
+    transition-delay: .68s;
 }
 
 
-/* 4. Wording appears */
-
-.envelope-wrapper.open .letter > * {
+.opening-screen.opened .letter-inner {
     opacity: 1;
+
+    transform: translateY(0);
 
     transition-delay: 1.25s;
 }
 
 
-/* 5. Instruction disappears */
 
-.envelope-wrapper.open + .open-text {
+/* ==================================================
+   GARDEN SCREEN
+   ================================================== */
+
+.garden-scene {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1;
+
+    min-height: 100vh;
+
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding:
+        max(40px, env(safe-area-inset-top))
+        24px
+        max(35px, env(safe-area-inset-bottom));
+
+    background:
+        linear-gradient(
+            180deg,
+            #cadde0 0%,
+            #dce0cd 30%,
+            #c7c5a5 50%,
+            #829978 72%,
+            #64837b 100%
+        );
+
     opacity: 0;
 
-    transform:
-        translateX(-50%)
-        translateY(-8px);
+    visibility: hidden;
+
+    transform: scale(1.035);
+
+    transition:
+        opacity 1.8s ease,
+        visibility 1.8s ease,
+        transform 2.4s ease;
 }
 
 
-/* ==============================
-   MOBILE
-   ============================== */
+.garden-scene.visible {
+    opacity: 1;
+    visibility: visible;
+
+    transform: scale(1);
+}
+
+
+
+/* ==================================================
+   SKY
+   ================================================== */
+
+.sky {
+    position: absolute;
+
+    inset: 0 0 auto 0;
+
+    height: 54%;
+
+    background:
+        radial-gradient(
+            circle at 72% 18%,
+            rgba(255, 237, 156, .80) 0%,
+            rgba(255, 232, 165, .28) 16%,
+            transparent 34%
+        ),
+
+        radial-gradient(
+            ellipse at 14% 48%,
+            rgba(177, 173, 206, .42),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 86% 58%,
+            rgba(225, 183, 191, .25),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            180deg,
+            #c8dde1 0%,
+            #d9ded0 48%,
+            #e3d6b8 100%
+        );
+
+    filter: blur(3px);
+
+    transform: scale(1.04);
+}
+
+
+
+/* ==================================================
+   DISTANT GARDEN
+   ================================================== */
+
+.distant-garden {
+    position: absolute;
+
+    left: -8%;
+    top: 34%;
+
+    width: 116%;
+    height: 40%;
+
+    background:
+        radial-gradient(
+            ellipse at 3% 60%,
+            rgba(66, 100, 68, .90) 0 15%,
+            transparent 31%
+        ),
+
+        radial-gradient(
+            ellipse at 20% 54%,
+            rgba(92, 123, 78, .92) 0 18%,
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 39% 64%,
+            rgba(61, 94, 66, .88) 0 20%,
+            transparent 37%
+        ),
+
+        radial-gradient(
+            ellipse at 58% 50%,
+            rgba(113, 135, 83, .88) 0 19%,
+            transparent 36%
+        ),
+
+        radial-gradient(
+            ellipse at 78% 62%,
+            rgba(66, 102, 70, .90) 0 20%,
+            transparent 38%
+        ),
+
+        radial-gradient(
+            ellipse at 99% 52%,
+            rgba(105, 129, 82, .88) 0 18%,
+            transparent 35%
+        );
+
+    filter: blur(15px);
+
+    opacity: .88;
+
+    transform: scale(1.12);
+}
+
+
+
+/* ==================================================
+   FLOWER GARDEN
+   ================================================== */
+
+.garden-bed {
+    position: absolute;
+
+    top: 45%;
+
+    width: 60%;
+    height: 38%;
+
+    opacity: .82;
+
+    filter: blur(7px);
+
+    background-size:
+        105px 120px,
+        130px 105px,
+        90px 130px,
+        145px 115px,
+        115px 100px,
+        100% 100%;
+}
+
+
+.garden-bed-left {
+    left: -17%;
+
+    transform:
+        rotate(-4deg)
+        scale(1.15);
+
+    background-image:
+
+        radial-gradient(
+            ellipse,
+            rgba(220, 154, 182, .95) 0 10%,
+            transparent 25%
+        ),
+
+        radial-gradient(
+            ellipse,
+            rgba(167, 145, 197, .92) 0 9%,
+            transparent 24%
+        ),
+
+        radial-gradient(
+            ellipse,
+            rgba(239, 198, 103, .90) 0 8%,
+            transparent 22%
+        ),
+
+        radial-gradient(
+            ellipse,
+            rgba(120, 150, 191, .85) 0 8%,
+            transparent 22%
+        ),
+
+        radial-gradient(
+            ellipse,
+            rgba(234, 179, 185, .88) 0 8%,
+            transparent 23%
+        ),
+
+        radial-gradient(
+            ellipse at 50% 70%,
+            rgba(51, 94, 59, .95),
+            rgba(82, 119, 67, .7) 45%,
+            transparent 75%
+        );
+}
+
+
+.garden-bed-right {
+    right: -17%;
+
+    transform:
+        rotate(4deg)
+        scale(1.15);
+
+    background-image:
+
+        radial-gradient(
+            ellipse,
+            rgba(187, 151, 203, .95) 0 10%,
+            transparent 25%
+        ),
+
+        radial-gradient(
+            ellipse,
+            rgba(235, 178, 194, .90) 0 9%,
+            transparent 24%
+        ),
+
+        radial-gradient(
+            ellipse,
+            rgba(238, 200, 107, .90) 0 8%,
+            transparent 22%
+        ),
+
+        radial-gradient(
+            ellipse,
+            rgba(119, 146, 190, .85) 0 8%,
+            transparent 22%
+        ),
+
+        radial-gradient(
+            ellipse,
+            rgba(215, 146, 171, .90) 0 8%,
+            transparent 23%
+        ),
+
+        radial-gradient(
+            ellipse at 50% 70%,
+            rgba(51, 91, 57, .95),
+            rgba(82, 116, 65, .72) 45%,
+            transparent 75%
+        );
+}
+
+
+
+/* ==================================================
+   POND
+   ================================================== */
+
+.pond {
+    position: absolute;
+
+    left: -8%;
+    bottom: -8%;
+
+    width: 116%;
+    height: 34%;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            ellipse at 20% 28%,
+            rgba(185, 170, 204, .34),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            ellipse at 75% 45%,
+            rgba(224, 181, 193, .28),
+            transparent 29%
+        ),
+
+        radial-gradient(
+            ellipse at 48% 72%,
+            rgba(205, 197, 157, .19),
+            transparent 34%
+        ),
+
+        linear-gradient(
+            180deg,
+            #8eaaa0 0%,
+            #71958f 48%,
+            #557c7b 100%
+        );
+
+    filter: blur(1.2px);
+
+    transform:
+        rotate(-.7deg)
+        scale(1.04);
+}
+
+
+
+/* ==================================================
+   WATER REFLECTIONS
+   ================================================== */
+
+.reflection {
+    position: absolute;
+
+    height: 2px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(246, 232, 197, .33);
+
+    filter: blur(1px);
+}
+
+
+.reflection-one {
+    width: 40%;
+
+    left: 5%;
+    top: 28%;
+}
+
+
+.reflection-two {
+    width: 34%;
+
+    right: 7%;
+    top: 51%;
+}
+
+
+.reflection-three {
+    width: 25%;
+
+    left: 38%;
+    top: 72%;
+}
+
+
+
+/* ==================================================
+   WATER LILIES
+   ================================================== */
+
+.lily {
+    position: absolute;
+
+    width: 45px;
+    height: 15px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 45%,
+            rgba(123, 143, 86, .9),
+            rgba(75, 116, 78, .8) 55%,
+            transparent 62%
+        );
+
+    filter: blur(.4px);
+
+    opacity: .75;
+}
+
+
+.lily::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: -6px;
+
+    width: 11px;
+    height: 11px;
+
+    transform: translateX(-50%);
+
+    border-radius:
+        50% 50% 45% 45%;
+
+    background:
+        radial-gradient(
+            circle,
+            #f3d5d7,
+            #dca5bd 65%,
+            transparent 70%
+        );
+}
+
+
+.lily-one {
+    left: 12%;
+    top: 33%;
+
+    transform: rotate(-5deg);
+}
+
+
+.lily-two {
+    left: 39%;
+    top: 64%;
+
+    transform:
+        scale(.8)
+        rotate(4deg);
+}
+
+
+.lily-three {
+    right: 12%;
+    top: 42%;
+
+    transform:
+        scale(1.15)
+        rotate(-3deg);
+}
+
+
+.lily-four {
+    right: 34%;
+    top: 78%;
+
+    transform:
+        scale(.65)
+        rotate(5deg);
+}
+
+
+
+/* ==================================================
+   FOREGROUND
+   ================================================== */
+
+.foreground {
+    position: absolute;
+
+    bottom: -13%;
+
+    width: 56%;
+    height: 35%;
+
+    z-index: 2;
+
+    opacity: .75;
+
+    filter: blur(8px);
+}
+
+
+.foreground-left {
+    left: -18%;
+
+    transform: rotate(5deg);
+
+    background:
+        radial-gradient(
+            ellipse at 30% 20%,
+            rgba(209, 142, 174, .95),
+            transparent 14%
+        ),
+
+        radial-gradient(
+            ellipse at 57% 31%,
+            rgba(231, 190, 102, .90),
+            transparent 13%
+        ),
+
+        radial-gradient(
+            ellipse at 42% 52%,
+            rgba(161, 144, 192, .92),
+            transparent 15%
+        ),
+
+        radial-gradient(
+            ellipse at 60% 80%,
+            #3f684d,
+            transparent 55%
+        );
+}
+
+
+.foreground-right {
+    right: -18%;
+
+    transform: rotate(-5deg);
+
+    background:
+        radial-gradient(
+            ellipse at 70% 18%,
+            rgba(202, 143, 177, .95),
+            transparent 14%
+        ),
+
+        radial-gradient(
+            ellipse at 44% 36%,
+            rgba(231, 192, 103, .90),
+            transparent 13%
+        ),
+
+        radial-gradient(
+            ellipse at 62% 55%,
+            rgba(151, 143, 193, .90),
+            transparent 15%
+        ),
+
+        radial-gradient(
+            ellipse at 42% 82%,
+            #40694d,
+            transparent 55%
+        );
+}
+
+
+
+/* ==================================================
+   PAINTERLY VEIL
+   ================================================== */
+
+.garden-scene::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 3;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 20%,
+            rgba(42, 67, 48, .06) 100%
+        ),
+
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.08),
+            transparent 35%,
+            rgba(44,78,60,.08)
+        );
+
+    backdrop-filter: blur(.4px);
+}
+
+
+
+/* ==================================================
+   GARDEN WORDING
+   ================================================== */
+
+.garden-content {
+    position: relative;
+
+    z-index: 5;
+
+    width: min(91vw, 540px);
+
+    text-align: center;
+
+    color: #fffaf0;
+
+    text-shadow:
+        0 2px 15px rgba(42, 60, 43, .38);
+
+    opacity: 0;
+
+    transform: translateY(18px);
+
+    transition:
+        opacity 1.5s ease .65s,
+        transform 1.5s ease .65s;
+}
+
+
+.garden-scene.visible .garden-content {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+.garden-intro {
+    margin-bottom: 22px;
+
+    font-size: 11px;
+    font-weight: 500;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+}
+
+
+.garden-content h2 {
+    font-size: clamp(34px, 9vw, 51px);
+
+    font-weight: 400;
+    font-style: italic;
+
+    line-height: .98;
+}
+
+
+.garden-content h2 span {
+    display: block;
+
+    margin: 8px 0;
+
+    font-size: 20px;
+
+    font-style: normal;
+}
+
+
+.garden-ornament {
+    margin: 25px 0 23px;
+
+    font-size: 18px;
+}
+
+
+.couple-names {
+    font-size: clamp(17px, 4.5vw, 21px);
+
+    line-height: 1.25;
+}
+
+
+.couple-names span {
+    display: block;
+
+    margin: 10px 0;
+
+    font-size: 15px;
+
+    font-style: italic;
+}
+
+
+.hashtag {
+    margin-top: 29px;
+
+    font-size: 12px;
+
+    letter-spacing: 2.5px;
+}
+
+
+
+/* ==================================================
+   SUBTLE GARDEN MOVEMENT
+   ================================================== */
+
+.garden-scene.visible .distant-garden {
+    animation:
+        gardenBreathe
+        9s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+
+.garden-scene.visible .garden-bed-left {
+    animation:
+        flowersLeft
+        8s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+
+.garden-scene.visible .garden-bed-right {
+    animation:
+        flowersRight
+        10s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+
+.garden-scene.visible .reflection-one {
+    animation:
+        ripple
+        6s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+
+.garden-scene.visible .reflection-two {
+    animation:
+        ripple
+        8s
+        ease-in-out
+        infinite
+        alternate-reverse;
+}
+
+
+@keyframes gardenBreathe {
+
+    from {
+        transform: scale(1.12);
+    }
+
+    to {
+        transform: scale(1.15);
+    }
+
+}
+
+
+@keyframes flowersLeft {
+
+    from {
+        transform:
+            rotate(-4deg)
+            scale(1.15)
+            translateX(0);
+    }
+
+    to {
+        transform:
+            rotate(-3deg)
+            scale(1.17)
+            translateX(5px);
+    }
+
+}
+
+
+@keyframes flowersRight {
+
+    from {
+        transform:
+            rotate(4deg)
+            scale(1.15)
+            translateX(0);
+    }
+
+    to {
+        transform:
+            rotate(3deg)
+            scale(1.17)
+            translateX(-5px);
+    }
+
+}
+
+
+@keyframes ripple {
+
+    from {
+        transform: scaleX(.92);
+
+        opacity: .2;
+    }
+
+    to {
+        transform: scaleX(1.08);
+
+        opacity: .5;
+    }
+
+}
+
+
+
+/* ==================================================
+   PHONE
+   ================================================== */
 
 @media (max-width: 500px) {
 
@@ -540,741 +1372,142 @@ body {
         height: 225px;
     }
 
-    .letter {
-        height: 185px;
 
-        top: 18px;
+    .open-instruction {
+        top: calc(50% - 170px);
 
-        padding: 22px 18px;
-
-        transform: translateY(10px);
+        font-size: 9px;
+        letter-spacing: 3.5px;
     }
 
-.letter-small {
-    margin-bottom: 10px;
 
-    font-size: 7px;
-    letter-spacing: 2px;
-}
-   k
+    .letter {
+        left: 7%;
+        top: 8%;
 
-.letter h1 {
-    font-size: 29px;
-    line-height: 0.95;
-}
+        width: 86%;
+        height: 82%;
 
-.letter h1 span {
-    margin: 1px 0;
+        padding: 20px 15px;
 
-    font-size: 16px;
-}
+        transform: translateY(5px);
+    }
 
-.letter-date {
-    margin-top: 10px;
 
-    font-size: 8px;
-    letter-spacing: 3px;
-}
+    .letter-small {
+        margin-bottom: 10px;
+
+        font-size: 7px;
+        letter-spacing: 2px;
+    }
+
+
+    .letter h1 {
+        font-size: 29px;
+
+        line-height: .96;
+    }
+
+
+    .letter h1 span {
+        margin: 2px 0;
+
+        font-size: 16px;
+    }
+
+
+    .letter-date {
+        margin-top: 10px;
+
+        font-size: 8px;
+
+        letter-spacing: 3px;
+    }
+
 
     .wax-seal {
         width: 68px;
         height: 66px;
-
-        font-size: 21px;
     }
 
-    .open-text {
-        margin-top: 35px;
+
+    .seal-text {
+        font-size: 23px;
     }
 
-    .envelope-wrapper.open .letter {
+
+    .opening-screen.opened .letter {
         transform: translateY(-115px);
     }
-   
-   /* ==============================
-   MONET GARDEN
-   ============================== */
 
-.garden-scene {
-    position: fixed;
-    inset: 0;
-    z-index: 50;
 
-    min-height: 100vh;
-    overflow: hidden;
+    .garden-content {
+        width: 92vw;
+    }
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-    padding: 40px 28px;
+    .garden-intro {
+        margin-bottom: 20px;
 
-    background:
-        /* soft sunlight */
-        radial-gradient(
-            circle at 72% 16%,
-            rgba(255, 240, 166, 0.75) 0%,
-            rgba(255, 235, 176, 0.25) 17%,
-            transparent 35%
-        ),
+        font-size: 9px;
+        letter-spacing: 3.3px;
+    }
 
-        /* lavender atmosphere */
-        radial-gradient(
-            ellipse at 15% 35%,
-            rgba(177, 158, 201, 0.55) 0%,
-            transparent 38%
-        ),
 
-        /* pink flowers */
-        radial-gradient(
-            ellipse at 88% 45%,
-            rgba(222, 151, 174, 0.55) 0%,
-            transparent 28%
-        ),
+    .garden-content h2 {
+        font-size: clamp(33px, 9vw, 43px);
+    }
 
-        /* blue flowers */
-        radial-gradient(
-            ellipse at 10% 78%,
-            rgba(110, 145, 188, 0.5) 0%,
-            transparent 35%
-        ),
 
-        /* greenery */
-        radial-gradient(
-            ellipse at 82% 78%,
-            rgba(105, 143, 103, 0.65) 0%,
-            transparent 40%
-        ),
+    .garden-content h2 span {
+        margin: 6px 0;
 
-        /* distant garden */
-        linear-gradient(
-            180deg,
-            #c9d9dc 0%,
-            #d9d9c3 30%,
-            #9eaf86 58%,
-            #738d6b 78%,
-            #536f59 100%
-        );
+        font-size: 18px;
+    }
+
+
+    .garden-ornament {
+        margin: 21px 0 20px;
+    }
+
+
+    .couple-names {
+        font-size: 17px;
+
+        line-height: 1.22;
+    }
+
+
+    .couple-names span {
+        margin: 9px 0;
+
+        font-size: 14px;
+    }
+
+
+    .hashtag {
+        margin-top: 25px;
+
+        font-size: 10px;
+    }
+
 }
 
 
-/* dreamy painted haze */
 
-.garden-scene::before {
-    content: "";
+/* ==================================================
+   REDUCED MOTION
+   ================================================== */
 
-    position: absolute;
-    inset: -10%;
+@media (prefers-reduced-motion: reduce) {
 
-    background:
-        radial-gradient(
-            ellipse at 50% 105%,
-            rgba(104, 131, 137, 0.85),
-            transparent 45%
-        ),
-        radial-gradient(
-            ellipse at 30% 80%,
-            rgba(216, 186, 111, 0.45),
-            transparent 28%
-        ),
-        radial-gradient(
-            ellipse at 70% 70%,
-            rgba(184, 140, 181, 0.4),
-            transparent 32%
-        );
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
 
-    filter: blur(22px);
+        transition-duration: .01ms !important;
+    }
 
-    opacity: 0.18;
-
-   z-index: 2;
-   
-   pointer-events: none;
-}
-
-
-/* subtle light over everything */
-
-.garden-scene::after {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255,255,255,.13),
-            transparent 35%,
-            rgba(37,72,55,.10)
-        );
-
-    pointer-events: none;
-}
-
-
-/* ==============================
-   CEREMONY WORDING
-   ============================== */
-
-.garden-content {
-    position: relative;
-    z-index: 4;
-
-    width: min(90%, 520px);
-
-    text-align: center;
-
-    color: #fdf9ed;
-
-    text-shadow:
-        0 2px 14px rgba(36, 57, 43, 0.42);
-}
-
-
-.garden-intro {
-    margin-bottom: 22px;
-
-    font-size: 9px;
-    letter-spacing: 3px;
-
-    text-transform: uppercase;
-}
-
-
-.garden-content h2 {
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size: clamp(30px, 8vw, 48px);
-
-    font-weight: normal;
-    font-style: italic;
-
-    line-height: 1.05;
-}
-
-
-.garden-content h2 span {
-    display: block;
-
-    margin: 7px 0;
-
-    font-size: 18px;
-    font-style: normal;
-}
-
-
-.garden-divider {
-    margin: 25px 0 21px;
-
-    font-size: 18px;
-}
-
-
-.garden-names {
-    max-width: 400px;
-
-    margin: 0 auto;
-
-    font-size: clamp(15px, 4vw, 19px);
-
-    line-height: 1.5;
-}
-
-
-.garden-names span {
-    display: block;
-
-    margin: 8px 0;
-
-    font-size: 12px;
-    font-style: italic;
-}
-
-
-.garden-hashtag {
-    margin-top: 30px;
-
-    font-size: 10px;
-    letter-spacing: 2px;
-
-    opacity: .9;
-}
-
-   /* =========================================
-   MONET GARDEN LANDSCAPE
-   ========================================= */
-
-.garden-landscape {
-    position: absolute;
-    inset: 0;
-
-    overflow: hidden;
-
-    z-index: 2;
-
-    pointer-events: none;
-}
-
-
-/* -----------------------------------------
-   PALE MORNING SKY
-   ----------------------------------------- */
-
-.garden-sky {
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 44%;
-
-    background:
-        radial-gradient(
-            circle at 72% 18%,
-            rgba(255, 241, 174, .85),
-            transparent 25%
-        ),
-        radial-gradient(
-            ellipse at 20% 40%,
-            rgba(192, 191, 219, .45),
-            transparent 38%
-        ),
-        linear-gradient(
-            180deg,
-            rgba(194, 218, 222, .9),
-            rgba(226, 218, 192, .65)
-        );
-
-    filter: blur(2px);
-}
-
-
-/* -----------------------------------------
-   DISTANT TREES
-   ----------------------------------------- */
-
-.distant-trees {
-    position: absolute;
-
-    top: 29%;
-    left: -8%;
-
-    width: 116%;
-    height: 32%;
-
-    background:
-        radial-gradient(
-            ellipse at 8% 70%,
-            #637c62 0 18%,
-            transparent 19%
-        ),
-        radial-gradient(
-            ellipse at 24% 60%,
-            #78906d 0 21%,
-            transparent 22%
-        ),
-        radial-gradient(
-            ellipse at 43% 65%,
-            #596f58 0 22%,
-            transparent 23%
-        ),
-        radial-gradient(
-            ellipse at 62% 57%,
-            #81936c 0 22%,
-            transparent 23%
-        ),
-        radial-gradient(
-            ellipse at 80% 65%,
-            #5f775c 0 22%,
-            transparent 23%
-        ),
-        radial-gradient(
-            ellipse at 97% 59%,
-            #82936d 0 19%,
-            transparent 20%
-        );
-
-    filter: blur(7px);
-
-    opacity: .72;
-}
-
-
-/* -----------------------------------------
-   LEFT FLOWER BANK
-   ----------------------------------------- */
-
-.flower-bank-left {
-    position: absolute;
-
-    left: -12%;
-    top: 42%;
-
-    width: 58%;
-    height: 42%;
-
-    background:
-        radial-gradient(
-            circle at 24% 20%,
-            rgba(222, 168, 193, .95) 0 3%,
-            transparent 4%
-        ),
-        radial-gradient(
-            circle at 42% 33%,
-            rgba(182, 158, 207, .95) 0 4%,
-            transparent 5%
-        ),
-        radial-gradient(
-            circle at 64% 18%,
-            rgba(246, 208, 121, .9) 0 3%,
-            transparent 4%
-        ),
-        radial-gradient(
-            circle at 72% 46%,
-            rgba(225, 153, 174, .9) 0 4%,
-            transparent 5%
-        ),
-        radial-gradient(
-            circle at 38% 60%,
-            rgba(126, 155, 201, .9) 0 4%,
-            transparent 5%
-        ),
-        radial-gradient(
-            ellipse at 45% 55%,
-            rgba(69, 104, 65, .9),
-            transparent 62%
-        );
-
-    filter: blur(2px);
-
-    opacity: .9;
-}
-
-
-/* -----------------------------------------
-   RIGHT FLOWER BANK
-   ----------------------------------------- */
-
-.flower-bank-right {
-    position: absolute;
-
-    right: -12%;
-    top: 39%;
-
-    width: 58%;
-    height: 45%;
-
-    background:
-        radial-gradient(
-            circle at 70% 17%,
-            rgba(201, 168, 216, .95) 0 4%,
-            transparent 5%
-        ),
-        radial-gradient(
-            circle at 42% 27%,
-            rgba(245, 211, 125, .95) 0 3%,
-            transparent 4%
-        ),
-        radial-gradient(
-            circle at 65% 48%,
-            rgba(231, 162, 187, .95) 0 4%,
-            transparent 5%
-        ),
-        radial-gradient(
-            circle at 35% 53%,
-            rgba(128, 156, 203, .9) 0 4%,
-            transparent 5%
-        ),
-        radial-gradient(
-            circle at 78% 66%,
-            rgba(238, 192, 118, .85) 0 3%,
-            transparent 4%
-        ),
-        radial-gradient(
-            ellipse at 55% 53%,
-            rgba(65, 102, 65, .9),
-            transparent 62%
-        );
-
-    filter: blur(2px);
-
-    opacity: .9;
-}
-
-
-/* -----------------------------------------
-   POND
-   ----------------------------------------- */
-
-.garden-pond {
-    position: absolute;
-
-    left: -10%;
-    bottom: -3%;
-
-    width: 120%;
-    height: 39%;
-
-    overflow: hidden;
-
-    background:
-        radial-gradient(
-            ellipse at 28% 35%,
-            rgba(176, 172, 208, .5),
-            transparent 25%
-        ),
-        radial-gradient(
-            ellipse at 70% 54%,
-            rgba(226, 184, 191, .38),
-            transparent 25%
-        ),
-        linear-gradient(
-            180deg,
-            rgba(124, 160, 153, .85),
-            rgba(88, 131, 126, .92)
-        );
-
-    transform: rotate(-1deg);
-
-    filter: blur(.4px);
-}
-
-
-/* -----------------------------------------
-   WATER RIPPLES
-   ----------------------------------------- */
-
-.water-ripple {
-    position: absolute;
-
-    height: 1px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(245, 236, 208, .45);
-
-    box-shadow:
-        0 8px 0 rgba(201, 189, 211, .18),
-        0 16px 0 rgba(236, 207, 187, .15);
-}
-
-
-.ripple-one {
-    width: 38%;
-
-    left: 7%;
-    top: 30%;
-}
-
-
-.ripple-two {
-    width: 46%;
-
-    right: 5%;
-    top: 55%;
-}
-
-
-.ripple-three {
-    width: 27%;
-
-    left: 39%;
-    top: 76%;
-}
-
-
-/* -----------------------------------------
-   FOREGROUND FLOWERS
-   ----------------------------------------- */
-
-.foreground-flowers {
-    position: absolute;
-
-    bottom: -8%;
-
-    width: 57%;
-    height: 36%;
-
-    filter: blur(1px);
-
-    opacity: .95;
-}
-
-
-.foreground-left {
-    left: -13%;
-
-    background:
-        radial-gradient(
-            circle at 25% 30%,
-            #c89ab9 0 4%,
-            transparent 5%
-        ),
-        radial-gradient(
-            circle at 48% 22%,
-            #e1b96e 0 4%,
-            transparent 5%
-        ),
-        radial-gradient(
-            circle at 64% 47%,
-            #9e9bc1 0 5%,
-            transparent 6%
-        ),
-        radial-gradient(
-            circle at 36% 63%,
-            #df9ca9 0 5%,
-            transparent 6%
-        ),
-        radial-gradient(
-            ellipse at 42% 75%,
-            #456a4f 0 38%,
-            transparent 39%
-        );
-}
-
-
-.foreground-right {
-    right: -13%;
-
-    background:
-        radial-gradient(
-            circle at 67% 24%,
-            #d5a1bd 0 5%,
-            transparent 6%
-        ),
-        radial-gradient(
-            circle at 45% 38%,
-            #e7c270 0 4%,
-            transparent 5%
-        ),
-        radial-gradient(
-            circle at 74% 55%,
-            #9897c0 0 5%,
-            transparent 6%
-        ),
-        radial-gradient(
-            circle at 33% 67%,
-            #d893a6 0 5%,
-            transparent 6%
-        ),
-        radial-gradient(
-            ellipse at 58% 77%,
-            #45684c 0 38%,
-            transparent 39%
-        );
-}
-
-   /* =========================================
-   PAINTERLY GARDEN REFINEMENT
-   ========================================= */
-
-
-/* soften the hard horizon */
-
-.distant-trees {
-    top: 34%;
-    height: 36%;
-
-    filter: blur(14px);
-
-    opacity: .82;
-
-    transform: scale(1.08);
-}
-
-
-/* Make flower banks irregular and softer */
-
-.flower-bank-left,
-.flower-bank-right {
-    filter: blur(6px);
-
-    opacity: .72;
-
-    transform: scale(1.25);
-}
-
-/* Pond begins lower so it doesn't cut through names */
-
-.garden-pond {
-    bottom: -8%;
-
-    height: 31%;
-
-    transform: rotate(-1deg) scale(1.05);
-
-    background:
-        radial-gradient(
-            ellipse at 25% 25%,
-            rgba(186, 172, 207, .34),
-            transparent 28%
-        ),
-        radial-gradient(
-            ellipse at 68% 42%,
-            rgba(223, 184, 194, .28),
-            transparent 30%
-        ),
-        radial-gradient(
-            ellipse at 48% 80%,
-            rgba(118, 143, 116, .25),
-            transparent 35%
-        ),
-        linear-gradient(
-            180deg,
-            rgba(130, 165, 158, .78),
-            rgba(91, 137, 137, .88)
-        );
-
-    filter: blur(2px);
-}
-
-
-/* Water lines should barely be visible */
-
-.water-ripple {
-    opacity: .3;
-
-    filter: blur(1px);
-}
-
-
-/* Foreground should feel like paint rather than circles */
-
-.foreground-flowers {
-    bottom: -13%;
-
-    filter: blur(7px);
-
-    opacity: .65;
-
-    transform: scale(1.3);
-}
-
-
-/* Add atmospheric blending over the whole landscape */
-
-.garden-landscape::after {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            180deg,
-            transparent 25%,
-            rgba(218, 215, 185, .12) 48%,
-            rgba(93, 125, 93, .08) 70%,
-            rgba(112, 145, 145, .12) 100%
-        );
-
-    backdrop-filter: blur(1.5px);
-
-    pointer-events: none;
 }
