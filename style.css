@@ -147,7 +147,7 @@ body {
        Letter starts lowered inside envelope.
     */
 
-    transform: translateY(100px);
+    transform: translateY(20px);
 
     z-index: 2;
 
@@ -538,32 +538,33 @@ body {
 
         padding: 25px 18px;
 
-        transform: translateY(85px);
+        transform: translateY(15px);
     }
 
-    .letter-small {
-        margin-bottom: 12px;
+.letter-small {
+    margin-bottom: 10px;
 
-        font-size: 7px;
-        letter-spacing: 2px;
-    }
+    font-size: 7px;
+    letter-spacing: 2px;
+}
 
-    .letter h1 {
-        font-size: 29px;
-    }
+.letter h1 {
+    font-size: 29px;
+    line-height: 0.95;
+}
 
-    .letter h1 span {
-        margin: 2px 0;
+.letter h1 span {
+    margin: 1px 0;
 
-        font-size: 17px;
-    }
+    font-size: 16px;
+}
 
-    .letter-date {
-        margin-top: 13px;
+.letter-date {
+    margin-top: 10px;
 
-        font-size: 9px;
-        letter-spacing: 3px;
-    }
+    font-size: 8px;
+    letter-spacing: 3px;
+}
 
     .wax-seal {
         width: 68px;
@@ -577,6 +578,6 @@ body {
     }
 
     .envelope-wrapper.open .letter {
-        transform: translateY(-100px);
+        transform: translateY(-115px);
     }
 }
