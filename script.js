@@ -1,54 +1,100 @@
-const openingScreen =
-    document.getElementById("openingScreen");
 
-const envelope =
-    document.getElementById("envelope");
+	background-color: #f5e6d3;
 
-const waxSeal =
-    document.getElementById("waxSeal");
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0;
+}
 
-const gardenScene =
-    document.getElementById("gardenScene");
+h1 {
+	color: red;
+}
 
+.announcement {
+	color: green;
+}
 
-let invitationOpened = false;
+#open-button {
+	background-color: pink;
+	font-size: 20px;
+	padding-top: 15px;
+	padding-right: 40px;
+	padding-bottom: 15px;
+	padding-left: 40px;
+	border: 2px solid black;
+	margin: 30px;
+}
 
+.invitation {
+	text-align: center;
+}
 
-waxSeal.addEventListener("click", openInvitation);
+.envelope {
+	width: 500px;
+	height: 300px;
+	background-color: yellow;
+	position: relative;
+}
 
+.seal {
+	width: 70px;
+	height: 70px;
+	background-color: brown;
+	position: absolute;
+	top: 50%;
+	left: 50%;
 
-function openInvitation() {
+	transform: translate(-50%, -50%);
+	border-radius: 50%;
 
-    if (invitationOpened) {
-        return;
-    }
+	z-index: 3;
 
-    invitationOpened = true;
+	transition: opacity 1s;
+}
 
+.envelope.open .seal {
+	opacity: 0;
+}
 
-    /*
-       Step 1:
-       Open envelope.
-    */
+.letter {
+	width: 450px;
+	height: 250px;
+	background-color: white;
+	position: absolute;
+	top: 25px;
+	left: 25px;
 
-    openingScreen.classList.add("opened");
+	color: black;
+	text-align: center;
 
+	z-index: 1;
 
-    /*
-       Step 2:
-       Give the guest time to see the card.
+	transition: transform 1s;
+	transition-delay: 0.5s;
+}
 
-       The letter begins rising after about
-       0.7 seconds and the wording appears
-       shortly afterwards.
-    */
+.envelope.open .letter {
+	transform: translateY(-150px);
+}
 
-    setTimeout(() => {
+.flap {
+	width: 0;
+	height: 0;
+	border-left: 250px solid transparent;
+	border-right: 250px solid transparent;
+	border-top: 150px solid blue;
+	position: absolute;
+	top: 0;
+	left: 0;
 
-        gardenScene.classList.add("visible");
+	z-index: 2;
 
-        openingScreen.classList.add("leave");
+	transition: transform 1s;
+}
 
-    }, 4300);
+.envelope.open .flap {
+	transform: rotate(180deg);
 
 }
