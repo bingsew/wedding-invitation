@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap');
 
+body {
 	background-color: #f5e6d3;
 
 	display: flex;
@@ -36,6 +38,7 @@ h1 {
 	height: 300px;
 	background-color: yellow;
 	position: relative;
+	transition: opacity 1s;
 }
 
 .seal {
@@ -51,7 +54,15 @@ h1 {
 
 	z-index: 3;
 
-	transition: opacity 1s;
+	transition: opacity 1s, transform 0.3s;
+
+	cursor: pointer;
+	touch-action: manipulation;
+    	-webkit-tap-highlight-color: transparent;
+}
+
+.seal:hover {
+	transform: translate(-50%, -50%) scale(1.1);
 }
 
 .envelope.open .seal {
@@ -76,7 +87,7 @@ h1 {
 }
 
 .envelope.open .letter {
-	transform: translateY(-150px);
+	transform: translateY(-150px) scale(1.05);
 }
 
 .flap {
@@ -96,5 +107,134 @@ h1 {
 
 .envelope.open .flap {
 	transform: rotate(180deg);
+}
+
+.envelope.hide {
+	opacity: 0;
+}
+
+.garden {
+	opacity: 0;
+	transition: opacity 1.5s;
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	
+	text-align: center;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	width: 100%;
+	height: 100%;
+
+	background:
+		radial-gradient(circle at 20% 30%, #f4dce7, transparent 35%),
+   		radial-gradient(circle at 80% 25%, #d9d7ef, transparent 35%),
+    		radial-gradient(circle at 30% 80%, #dce8d3, transparent 40%),
+    		#f5f0df;
+
+	pointer-events: none;
+}
+
+.garden.show {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.garden .groom,
+.garden .bride {
+ 	font-family: "Cedarville Cursive", cursive;
+   	font-size: 2rem;
+    	font-weight: normal;
+    	margin-bottom: 5px;
+	margin: 15px 0;
+
+}
+
+.garden .and {
+ 	font-family: "Cedarville Cursive", cursive;
+   	font-size: 1.5rem;
+    	font-weight: normal;
+    	margin-bottom: 5px;
+	margin: -30px 0;
+
+}
+
+.garden .date {
+	font-family: "Cedarville Cursive", cursive;
+   	font-size: 1.4rem;
+    	font-weight: normal;
+    	margin-top: 20px;
+	margin-bottom: 8px;
+}
+
+.garden .venue {
+	font-family: "Cedarville Cursive", cursive;
+   	font-size: 1.4rem;
+    	font-weight: normal;
+	margin: 0;
+}
+
+.garden .intro {
+	font-family: "Cedarville Cursive", cursive;
+   	font-size: 1.5rem;
+    	font-weight: normal;
+    	margin-bottom: 5px;
+}
+
+.flowers {
+	position: absolute;
+	width: 180px;
+	height: 350px;
+	
+	background: 
+        radial-gradient(circle at 30% 80%, #81966d 0 12%, transparent 13%),
+        radial-gradient(circle at 60% 65%, #a7b58d 0 15%, transparent 16%),
+        radial-gradient(circle at 35% 45%, #d8a9ba 0 10%, transparent 11%),
+        radial-gradient(circle at 70% 35%, #c9b8dd 0 12%, transparent 13%);
+
+	z-index: 1;
+}
+
+.flowers-left {
+	left: 0;
+	bottom: 0;
+}
+
+.flowers-right {
+	right: 0;
+	bottom: 0;
+	transform: scaleX(-1);
+}
+
+@media (max-width: 600px) {
+
+	.envelope {
+		transform: scale(0.7);
+		transform-origin: center center;
+	}
+
+   	.garden-content {
+   	    	width: 85%;
+   	     	margin: 0 auto;
+  	}
+
+ 	.garden .bride,
+ 	.garden .groom {
+ 	        font-size: 1.6rem;
+ 	}
+
+    	.garden .date {
+        	font-size: 1.2rem;
+		transform: translateY(-20px);
+    	}
+
+    	.garden .venue {
+        	font-size: 1rem;
+	}
 
 }
